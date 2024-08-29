@@ -19,7 +19,7 @@ Este projeto automatiza o provisionamento e a configuração de ambientes de des
 
 ## Configuração do Terraform
 
-Navegue até o diretório \`terraform/\`:
+Navegue até o diretório `terraform/`:
 
 ```bash
 cd terraform
@@ -46,13 +46,13 @@ terraform apply
 
 ## Configuração do Ansible
 
-Navegue até o diretório \`ansible/\`:
+Navegue até o diretório `ansible/`:
 
 ```bash
 cd ansible
 ```
 
-Edite o arquivo \`inventory.ini\` para adicionar os hosts provisionados pelo Terraform.
+Edite o arquivo `inventory.ini` para adicionar os hosts provisionados pelo Terraform.
 
 Execute o playbook para configurar o ambiente:
 
@@ -100,5 +100,5 @@ ansible-playbook -i inventory.ini playbook.yml
 
 ## Licença
 
-Este projeto é licenciado sob os termos da licença MIT. Veja o arquivo \`LICENSE\` para mais detalhes.
+Este projeto é licenciado sob os termos da licença MIT. Veja o arquivo `LICENSE` para mais detalhes.
 EOL
