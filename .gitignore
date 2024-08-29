@@ -5,5 +5,5 @@
 *.env
 .env.*
 
-/terraform/.provisorios
-/terraform/provisorios
+/terraform/.terraform
+/terraform/terraform

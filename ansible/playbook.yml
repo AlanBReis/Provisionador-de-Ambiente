@@ -1,0 +1,20 @@
+- hosts: all
+  become: true
+  tasks:
+    - name: Instalar Nginx
+      apt:
+        name: nginx
+        state: present
+        update_cache: yes # Adiciona atualização do cache do apt
+
+    - name: Garantir que o serviço Nginx esteja ativo
+      service:
+        name: nginx
+        state: started
+        enabled: yes
+
+    - name: Clonar o repositório com o conteúdo da página web
+      git:
+        repo: "https://github.com/AlanBReis/reis-music"
+        dest: /var/www/html
+        update: yes
