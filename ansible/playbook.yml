@@ -5,7 +5,7 @@
       apt:
         name: nginx
         state: present
-        update_cache: yes # Adiciona atualização do cache do apt
+        update_cache: yes
 
     - name: Garantir que o serviço Nginx esteja ativo
       service:
@@ -18,3 +18,27 @@
         repo: "https://github.com/AlanBReis/reis-music"
         dest: /var/www/html
         update: yes
+
+    - name: Configurar Nginx para servir a página web
+      copy:
+        dest: /etc/nginx/sites-available/default
+        content: |
+          server {
+              listen 80;
+              server_name _;
+
+              root /var/www/html;
+              index index.html;
+
+              location / {
+                  try_files $uri $uri/ =404;
+              }
+          }
+      notify:
+        - Restart Nginx
+
+  handlers:
+    - name: Restart Nginx
+      service:
+        name: nginx
+        state: restarted

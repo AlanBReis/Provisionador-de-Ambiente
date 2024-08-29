@@ -1,12 +1,13 @@
+cat <<EOL > README.md
 # Provisionador de Ambientes
 
-Este projeto visa automatizar o provisionamento e configuração de ambientes de desenvolvimento, utilizando Terraform e Ansible. O objetivo é criar e configurar servidores virtuais com as ferramentas e softwares necessários para iniciar um novo projeto. O projeto suporta múltiplos ambientes, como desenvolvimento, staging e produção.
+Este projeto automatiza o provisionamento e a configuração de ambientes de desenvolvimento, utilizando Terraform, Ansible e scripts customizados. O objetivo é clonar um repositório, provisionar a infraestrutura necessária na AWS e configurar os servidores para hospedar uma página web. O projeto suporta múltiplos ambientes, como desenvolvimento, staging e produção.
 
 ## Estrutura do Projeto
 
-- **terraform/**: Contém os arquivos de configuração do Terraform para provisionamento dos ambientes.
-- **ansible/**: Contém os playbooks e roles do Ansible para configuração do ambiente.
-- **scripts/**: Scripts adicionais para automatizar tarefas comuns.
+- **terraform/**: Contém os arquivos de configuração do Terraform para provisionamento dos ambientes na AWS.
+- **ansible/**: Contém os playbooks e roles do Ansible para configuração dos servidores provisionados.
+- **scripts/**: Scripts adicionais para automatizar tarefas comuns, como clonagem de repositórios e deploy.
 - **LICENSE**: Licença do projeto.
 - **README.md**: Este arquivo.
 
@@ -14,58 +15,59 @@ Este projeto visa automatizar o provisionamento e configuração de ambientes de
 
 - Terraform
 - Ansible
-- Um provedor de nuvem (AWS, Azure, GCP, etc.)
+- AWS CLI configurado
+- Chave SSH configurada para acesso aos servidores
 
 ## Configuração do Terraform
 
-1. Navegue até o diretório `terraform/`:
+Navegue até o diretório \`terraform/\`:
 
-    ```bash
-    cd terraform
-    ```
+\`\`\`bash
+cd terraform
+\`\`\`
 
-2. Configure as variáveis de ambiente (ajuste conforme necessário):
+Configure as variáveis de ambiente (ajuste conforme necessário):
 
-    ```bash
-    export TF_VAR_region="us-east-1"
-    export TF_VAR_instance_type="t2.micro"
-    ```
+\`\`\`bash
+export TF_VAR_region="us-west-2"
+export TF_VAR_instance_type="t2.micro"
+\`\`\`
 
-3. Inicialize o Terraform:
+Inicialize o Terraform:
 
-    ```bash
-    terraform init
-    ```
+\`\`\`bash
+terraform init
+\`\`\`
 
-4. Aplique a configuração para criar os recursos:
+Aplique a configuração para criar os recursos na AWS:
 
-    ```bash
-    terraform apply
-    ```
+\`\`\`bash
+terraform apply
+\`\`\`
 
 ## Configuração do Ansible
 
-1. Navegue até o diretório `ansible/`:
+Navegue até o diretório \`ansible/\`:
 
-    ```bash
-    cd ansible
-    ```
+\`\`\`bash
+cd ansible
+\`\`\`
 
-2. Edite o arquivo `inventory.ini` para adicionar os hosts provisionados pelo Terraform.
+Edite o arquivo \`inventory.ini\` para adicionar os hosts provisionados pelo Terraform.
 
-3. Execute o playbook para configurar o ambiente:
+Execute o playbook para configurar o ambiente:
 
-    ```bash
-    ansible-playbook -i inventory.ini playbook.yml
-    ```
+\`\`\`bash
+ansible-playbook -i inventory.ini playbook.yml
+\`\`\`
 
 ## Scripts Adicionais
 
-### `scripts/setup.sh`
+### scripts/setup.sh
 
 Este script configura o ambiente local para desenvolvimento.
 
-```bash
+\`\`\`bash
 #!/bin/bash
 
 # Atualizar pacotes
@@ -79,11 +81,13 @@ sudo apt-get install terraform
 
 # Instalar Ansible
 sudo apt-get install ansible
+\`\`\`
 
+### scripts/deploy.sh
 
-scripts/deploy.sh
-Este script aplica a configuração do Terraform e executa o Ansible.
+Este script aplica a configuração do Terraform e executa o Ansible para provisionar e configurar a infraestrutura.
 
+\`\`\`bash
 #!/bin/bash
 
 # Aplicar Terraform
@@ -93,3 +97,9 @@ terraform apply -auto-approve
 # Configurar Ansible
 cd ../ansible
 ansible-playbook -i inventory.ini playbook.yml
+\`\`\`
+
+## Licença
+
+Este projeto é licenciado sob os termos da licença MIT. Veja o arquivo \`LICENSE\` para mais detalhes.
+EOL
