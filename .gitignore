@@ -1,0 +1,9 @@
+# Arquivos de log
+*.log
+
+# Arquivos de configuração de ambiente
+*.env
+.env.*
+
+/terraform/.provisorios
+/terraform/provisorios
