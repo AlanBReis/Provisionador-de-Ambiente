@@ -98,7 +98,3 @@ cd ../ansible
 ansible-playbook -i inventory.ini playbook.yml
 ```
 
-## Licença
-
-Este projeto é licenciado sob os termos da licença MIT. Veja o arquivo `LICENSE` para mais detalhes.
-EOL
